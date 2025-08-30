@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .quiz-container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 450px;
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 15px;
+    }
+    .option {
+      display: block;
+      margin: 8px 0;
+      padding: 10px;
+      background: #eee;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .option:hover {
+      background: #d3f8d3;
+    }
+    #nextBtn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      background: #4CAF50;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      display: none;
+    }
+    #nextBtn:hover {
+      background: #45a049;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h2 id="question">Loading Question...</h2>
+    <div id="options"></div>
+    <button id="nextBtn" onclick="nextQuestion()">Next</button>
+    <p id="result"></p>
+  </div>
+
+  <script>
+    const quizData = [
+      { question: "What is the capital of India?", options: ["Delhi", "Mumbai", "Chennai", "Kolkata"], answer: "Delhi" },
+      { question: "Which planet is known as the Red Planet?", options: ["Earth", "Mars", "Jupiter", "Venus"], answer: "Mars" },
+      { question: "Who is the father of the Nation (India)?", options: ["Jawaharlal Nehru", "Mahatma Gandhi", "B. R. Ambedkar", "Subhas Chandra Bose"], answer: "Mahatma Gandhi" },
+      { question: "Which is the largest ocean?", options: ["Atlantic", "Indian", "Pacific", "Arctic"], answer: "Pacific" },
+      { question: "Which gas do plants release during photosynthesis?", options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"], answer: "Oxygen" },
+      { question: "Who invented the light bulb?", options: ["Edison", "Newton", "Einstein", "Tesla"], answer: "Edison" },
+      { question: "Which is the national animal of India?", options: ["Lion", "Elephant", "Tiger", "Peacock"], answer: "Tiger" },
+      { question: "Which device is used to measure temperature?", options: ["Barometer", "Thermometer", "Hygrometer", "Altimeter"], answer: "Thermometer" },
+      { question: "Which is the smallest prime number?", options: ["0", "1", "2", "3"], answer: "2" },
+      { question: "Which festival is known as the festival of lights?", options: ["Holi", "Diwali", "Eid", "Pongal"], answer: "Diwali" }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    function loadQuestion() {
+      document.getElementById("result").innerText = "";
+      document.getElementById("nextBtn").style.display = "none";
+      const q = quizData[currentQuestion];
+      document.getElementById("question").innerText = q.question;
+      const optionsDiv = document.getElementById("options");
+      optionsDiv.innerHTML = "";
+      q.options.forEach(opt => {
+        const div = document.createElement("div");
+        div.className = "option";
+        div.innerText = opt;
+        div.onclick = () => checkAnswer(div, q.answer);
+        optionsDiv.appendChild(div);
+      });
+    }
+
+    function checkAnswer(element, correctAnswer) {
+      if (element.innerText === correctAnswer) {
+        element.style.background = "#a8f0a2";
+        document.getElementById("result").innerText = "✅ Correct!";
+        score++;
+      } else {
+        element.style.background = "#f7a1a1";
+        document.getElementById("result").innerText = "❌ Wrong!";
+      }
+      // Disable other options
+      let options = document.querySelectorAll(".option");
+      options.forEach(opt => opt.onclick = null);
+      document.getElementById("nextBtn").style.display = "inline-block";
+    }
+
+    function nextQuestion() {
+      currentQuestion++;
+      if (currentQuestion < quizData.length) {
+        loadQuestion();
+      } else {
+        document.querySelector(".quiz-container").innerHTML = 
+          `<h2>Quiz Finished 🎉</h2>
+           <p>Your Score: ${score} / ${quizData.length}</p>`;
+      }
+    }
+
+    // Load first question
+    loadQuestion();
+  </script>
+</body>
+</html>

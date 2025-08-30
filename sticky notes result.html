@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!-- saved from url=(0100)file:///C:/Users/Monika%20A/OneDrive/Desktop/my%20html%20programs/sticky%20notes/sticky%20board.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Sticky Note Board</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            background: #0056b3;
+            color: white;
+            padding: 10px;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: 1fr 200px 1fr; /* left - middle space - right */
+            gap: 20px;
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            min-height: 500px;
+        }
+
+        .middle-space {
+            background: rgba(200,200,200,0.1);
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .note {
+            width: 150px;
+            height: 150px;
+            padding: 10px;
+            box-sizing: border-box;
+            color: black;
+            font-weight: bold;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+            transform: rotate(-2deg);
+        }
+
+        /* Colors for notes */
+        .note1 { background: #cbd2ff; transform: rotate(-5deg); }
+        .note2 { background: #ff99c5; transform: rotate(-4deg); }
+        .note3 { background: yellow; transform: rotate(2deg); }
+        .note4 { background: green; transform: rotate(-4deg); }
+        .note5 { background: red; transform: rotate(5deg); }
+        .note6 { background: lightcoral; transform: rotate(-2deg); }
+
+    </style>
+</head>
+<body>
+
+<h1>📌 MY WORK NOTES (THIS WEEK)</h1>
+
+<div class="board">
+    <!-- Left column -->
+    <div class="column">
+        <div class="note note1">Submit project before Friday</div>
+        <div class="note note2">Read Chapter 4 - Data Structures</div>
+        <div class="note note3">Complete code in NAAN MUDHALVAN</div>
+    </div>
+
+    <!-- Middle space -->
+    <div class="middle-space"></div>
+
+    <!-- Right column -->
+    <div class="column">
+        <div class="note note4">Home tuition on Thursday</div>
+        <div class="note note5">Complete maths assignment</div>
+        <div class="note note6">Study for CAT1 exam for Tamil</div>
+    </div>
+</div>
+
+
+</body></html>
